@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpaceMission</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0a1a;
+            margin: 0;
+            color: white;
+        }
+
+        header {
+            background: #1a1a3e;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background: #111130;
+        }
+
+        .tab {
+            background: #1a1a3e;
+            color: white;
+            border: 1px solid #4a90e2;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .tab.ativo {
+            background: #4a90e2;
+        }
+
+        .container {
+            width: 500px;
+            margin: 30px auto;
+            background: #1a1a3e;
+            padding: 20px;
+            border: 1px solid #4a90e2;
+        }
+
+        h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #4a90e2;
+            padding-bottom: 5px;
+            color: #4a90e2;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #4a90e2;
+            background: #0a0a1a;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2c6fba;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #4a90e2;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #1a1a3e;
+            color: #4a90e2;
+        }
+
+        td {
+            background: #0d0d2b;
+        }
+
+        .btn-delete {
+            background: #c0392b;
+            padding: 5px;
+            font-size: 12px;
+            width: auto;
+        }
+
+        .btn-delete:hover {
+            background: #922b21;
+        }
+
+        .secao {
+            display: none;
+        }
+
+        .secao.ativa {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    SpaceMission — Gerenciamento de Missões Espaciais
+</header>
+
+<div class="tabs">
+    <button class="tab ativo" onclick="mostrarSecao('missoes')">Missões</button>
+    <button class="tab" onclick="mostrarSecao('astronautas')">Astronautas</button>
+    <button class="tab" onclick="mostrarSecao('veiculos')">Veículos</button>
+</div>
+
+<div class="container secao ativa" id="missoes">
+    <h2>Cadastrar Missão</h2>
+    <input type="text" id="missaoNome" placeholder="Nome da Missão">
+    <input type="text" id="missaoDestino" placeholder="Destino (ex: Marte, Lua)">
+    <input type="date" id="missaoData">
+    <select id="missaoStatus">
+        <option value="PLANEJADA">Planejada</option>
+        <option value="EM_DESENVOLVIMENTO">Em Desenvolvimento</option>
+        <option value="CONCLUIDA">Concluída</option>
+        <option value="CANCELADA">Cancelada</option>
+    </select>
+    <input type="number" id="missaoOrcamento" placeholder="Orçamento (R$)">
+    <button onclick="cadastrarMissao()">Cadastrar</button>
+
+    <h2>Missões</h2>
+    <button onclick="listarMissoes()">Atualizar Lista</button>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Destino</th>
+            <th>Status</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody id="tabelaMissoes"></tbody>
+    </table>
+</div>
+
+<div class="container secao" id="astronautas">
+    <h2>Cadastrar Astronauta</h2>
+    <input type="text" id="astronautaNome" placeholder="Nome">
+    <input type="text" id="astronautaNacionalidade" placeholder="Nacionalidade">
+    <input type="text" id="astronautaEspecialidade" placeholder="Especialidade">
+    <select id="astronautaStatus">
+        <option value="ATIVO">Ativo</option>
+        <option value="INATIVO">Inativo</option>
+        <option value="EM_MISSAO">Em Missão</option>
+    </select>
+    <button onclick="cadastrarAstronauta()">Cadastrar</button>
+
+    <h2>Astronautas</h2>
+    <button onclick="listarAstronautas()">Atualizar Lista</button>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Especialidade</th>
+            <th>Status</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody id="tabelaAstronautas"></tbody>
+    </table>
+</div>
+
+<div class="container secao" id="veiculos">
+    <h2>Cadastrar Veículo</h2>
+    <input type="text" id="veiculoNome" placeholder="Nome do Veículo">
+    <input type="text" id="veiculoTipo" placeholder="Tipo (ex: Foguete, Cápsula)">
+    <input type="number" id="veiculoCapacidade" placeholder="Capacidade">
+    <select id="veiculoStatus">
+        <option value="DISPONIVEL">Disponível</option>
+        <option value="EM_MISSAO">Em Missão</option>
+        <option value="MANUTENCAO">Em Manutenção</option>
+    </select>
+    <button onclick="cadastrarVeiculo()">Cadastrar</button>
+
+    <h2>Veículos</h2>
+    <button onclick="listarVeiculos()">Atualizar Lista</button>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Capacidade</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody id="tabelaVeiculos"></tbody>
+    </table>
+</div>
+
+<script>
+    const API_MISSOES = "http://localhost:8080/missoes";
+    const API_ASTRONAUTAS = "http://localhost:8080/astronautas";
+    const API_VEICULOS = "http://localhost:8080/veiculos";
+
+    function mostrarSecao(id) {
+        document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativa'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('ativo'));
+        document.getElementById(id).classList.add('ativa');
+        event.target.classList.add('ativo');
+    }
+
+    async function cadastrarMissao() {
+        const missao = {
+            nome: document.getElementById("missaoNome").value,
+            destino: document.getElementById("missaoDestino").value,
+            dataLancamento: document.getElementById("missaoData").value,
+            status: document.getElementById("missaoStatus").value,
+            orcamento: parseFloat(document.getElementById("missaoOrcamento").value)
+        };
+        try {
+            const res = await fetch(API_MISSOES, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(missao)
+            });
+            if (res.ok) { alert("Missão cadastrada!"); listarMissoes(); }
+            else { alert("Erro ao cadastrar missão"); }
+        } catch { alert("Erro na API"); }
+    }
+
+    async function listarMissoes() {
+        try {
+            const res = await fetch(API_MISSOES);
+            const data = await res.json();
+            const tabela = document.getElementById("tabelaMissoes");
+            tabela.innerHTML = "";
+            data.forEach(m => {
+                tabela.innerHTML += `
+                    <tr>
+                        <td>${m.nome}</td>
+                        <td>${m.destino}</td>
+                        <td>${m.status}</td>
+                        <td><button class="btn-delete" onclick="deletarMissao(${m.id})">Excluir</button></td>
+                    </tr>`;
+            });
+        } catch { alert("Erro ao buscar missões"); }
+    }
+
+    async function deletarMissao(id) {
+        if (!confirm("Deseja excluir?")) return;
+        try {
+            const res = await fetch(API_MISSOES + "/" + id, { method: "DELETE" });
+            if (res.ok) listarMissoes();
+        } catch { alert("Erro ao deletar"); }
+    }
+
+    async function cadastrarAstronauta() {
+        const astronauta = {
+            nome: document.getElementById("astronautaNome").value,
+            nacionalidade: document.getElementById("astronautaNacionalidade").value,
+            especialidade: document.getElementById("astronautaEspecialidade").value,
+            status: document.getElementById("astronautaStatus").value
+        };
+        try {
+            const res = await fetch(API_ASTRONAUTAS, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(astronauta)
+            });
+            if (res.ok) { alert("Astronauta cadastrado!"); listarAstronautas(); }
+            else { alert("Erro ao cadastrar astronauta"); }
+        } catch { alert("Erro na API"); }
+    }
+
+    async function listarAstronautas() {
+        try {
+            const res = await fetch(API_ASTRONAUTAS);
+            const data = await res.json();
+            const tabela = document.getElementById("tabelaAstronautas");
+            tabela.innerHTML = "";
+            data.forEach(a => {
+                tabela.innerHTML += `
+                    <tr>
+                        <td>${a.nome}</td>
+                        <td>${a.especialidade}</td>
+                        <td>${a.status}</td>
+                        <td><button class="btn-delete" onclick="deletarAstronauta(${a.id})">Excluir</button></td>
+                    </tr>`;
+            });
+        } catch { alert("Erro ao buscar astronautas"); }
+    }
+
+    async function deletarAstronauta(id) {
+        if (!confirm("Deseja excluir?")) return;
+        try {
+            const res = await fetch(API_ASTRONAUTAS + "/" + id, { method: "DELETE" });
+            if (res.ok) listarAstronautas();
+        } catch { alert("Erro ao deletar"); }
+    }
+
+    async function cadastrarVeiculo() {
+        const veiculo = {
+            nome: document.getElementById("veiculoNome").value,
+            tipo: document.getElementById("veiculoTipo").value,
+            capacidade: parseInt(document.getElementById("veiculoCapacidade").value),
+            status: document.getElementById("veiculoStatus").value
+        };
+        try {
+            const res = await fetch(API_VEICULOS, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(veiculo)
+            });
+            if (res.ok) { alert("Veículo cadastrado!"); listarVeiculos(); }
+            else { alert("Erro ao cadastrar veículo"); }
+        } catch { alert("Erro na API"); }
+    }
+
+    async function listarVeiculos() {
+        try {
+            const res = await fetch(API_VEICULOS);
+            const data = await res.json();
+            const tabela = document.getElementById("tabelaVeiculos");
+            tabela.innerHTML = "";
+            data.forEach(v => {
+                tabela.innerHTML += `
+                    <tr>
+                        <td>${v.nome}</td>
+                        <td>${v.tipo}</td>
+                        <td>${v.capacidade}</td>
+                        <td><button class="btn-delete" onclick="deletarVeiculo(${v.id})">Excluir</button></td>
+                    </tr>`;
+            });
+        } catch { alert("Erro ao buscar veículos"); }
+    }
+
+    async function deletarVeiculo(id) {
+        if (!confirm("Deseja excluir?")) return;
+        try {
+            const res = await fetch(API_VEICULOS + "/" + id, { method: "DELETE" });
+            if (res.ok) listarVeiculos();
+        } catch { alert("Erro ao deletar"); }
+    }
+</script>
+
+</body>
+</html>
