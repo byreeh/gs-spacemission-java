@@ -38,4 +38,41 @@ public class AstronautaBO {
             throw new AstronautaException("Erro ao listar astronautas", e);
         }
     }
+
+    public Astronauta buscarPorId(Long id) throws AstronautaException {
+        try {
+            AstronautaDAO dao = new AstronautaDAO();
+            Astronauta astronauta = dao.buscarPorId(id);
+            if (astronauta == null) {
+                throw new AstronautaException("Astronauta não encontrado");
+            }
+            return astronauta;
+        } catch (Exception e) {
+            throw new AstronautaException("Erro ao buscar astronauta", e);
+        }
+    }
+
+    public void atualizar(Astronauta astronauta) throws AstronautaException {
+        try {
+            if (astronauta.getId() == null) {
+                throw new AstronautaException("ID do astronauta é obrigatório para atualização");
+            }
+            AstronautaDAO dao = new AstronautaDAO();
+            dao.atualizar(astronauta);
+        } catch (Exception e) {
+            throw new AstronautaException("Erro ao atualizar astronauta", e);
+        }
+    }
+
+    public void deletar(Long id) throws AstronautaException {
+        try {
+            if (id == null) {
+                throw new AstronautaException("ID é obrigatório para deletar");
+            }
+            AstronautaDAO dao = new AstronautaDAO();
+            dao.deletar(id);
+        } catch (Exception e) {
+            throw new AstronautaException("Erro ao deletar astronauta", e);
+        }
+    }
 }
