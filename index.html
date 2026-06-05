@@ -42,7 +42,8 @@
         }
 
         .container {
-            width: 500px;
+            width: 90%;
+            max-width: 900px;
             margin: 30px auto;
             background: #1a1a3e;
             padding: 20px;
@@ -154,6 +155,8 @@
             <th>Nome</th>
             <th>Destino</th>
             <th>Status</th>
+            <th>Data de Lançamento</th>
+            <th>Orçamento</th>
             <th>Ação</th>
         </tr>
         </thead>
@@ -258,6 +261,8 @@
                         <td>${m.nome}</td>
                         <td>${m.destino}</td>
                         <td>${m.status}</td>
+                         <td>${m.dataLancamento}</td>
+                         <td>R$ ${m.orcamento.toLocaleString('pt-BR')}</td>
                         <td><button class="btn-delete" onclick="deletarMissao(${m.id})">Excluir</button></td>
                     </tr>`;
             });
