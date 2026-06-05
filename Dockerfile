@@ -1,6 +1,8 @@
 FROM eclipse-temurin:21-jdk AS build
 WORKDIR /app
 COPY . .
+COPY pom.xml .
+COPY src ./src
 RUN apt-get update && apt-get install -y maven
 RUN mvn package -DskipTests
 
