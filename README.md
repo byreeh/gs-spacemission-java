@@ -34,4 +34,6 @@ Sistema de Gerenciamento de Missões Espaciais — Global Solution 2026/1 FIAP
 - DELETE /veiculos/{id}
 
 ## Deploy
-Link: https://gs-spacemission-java.onrender.com
+API REST (Render): https://gs-spacemission-java.onrender.com
+Front-end (Vercel): https://gs-spacemission-java.vercel.app/
+
