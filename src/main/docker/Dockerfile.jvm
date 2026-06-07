@@ -85,7 +85,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 RUN apt-get update && apt-get install -y maven
-RUN mvn package -DskipTests
+RUN mvn package -DskipTests -Dquarkus.package.type=uber-jar
 
 FROM registry.access.redhat.com/ubi9/openjdk-21-runtime:1.24
 
