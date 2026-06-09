@@ -37,3 +37,6 @@ Sistema de Gerenciamento de Missões Espaciais — Global Solution 2026/1 FIAP
 - API REST (Render): https://gs-spacemission-java.onrender.com
 - Front-end (Vercel): https://gs-spacemission-java.vercel.app/
 
+## Video
+- Link: https://youtu.be/knGlojrGAS4
+
